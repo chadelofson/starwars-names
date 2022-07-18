@@ -10,7 +10,7 @@ jobs:
           node-version: '16'
       - run: npm prune
       - run: npm ci
-      - run: npm test:single
+      - run: npm run test:single
       - name: Release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
