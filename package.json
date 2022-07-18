@@ -3,6 +3,7 @@
   "version": "0.0.0-semantically-released",
   "description": "Get random Star Wars names",
   "main": "src/index.js",
+  "branch": ["main", "next"],
   "scripts": {
     "commit": "git-cz",
     "test": "mocha src/index.test.js -w",
