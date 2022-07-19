@@ -3,7 +3,11 @@
   "version": "0.0.0-semantically-released",
   "description": "Get random Star Wars names",
   "main": "src/index.js",
-  "release": { "branches": [ "main" ] },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
   "scripts": {
     "commit": "git-cz",
     "test": "mocha src/index.test.js -w",
@@ -32,12 +36,16 @@
     "chai": "3.5.0",
     "commitizen": "4.2.5",
     "cz-conventional-changelog": "3.3.0",
+    "ghooks": "2.0.4",
     "mocha": "2.5.3",
     "semantic-release": "^19.0.3"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run test:single"
     }
   }
 }
