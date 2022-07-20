@@ -1,55 +1,72 @@
 {
-  "name": "starwars-names-cls",
-  "version": "0.0.0-semantically-released",
-  "description": "Get random Star Wars names",
-  "main": "src/index.js",
-  "release": {
-    "branches": [
-      "main"
-    ]
-  },
-  "scripts": {
-    "commit": "git-cz",
-    "test": "mocha src/index.test.js -w",
-    "test:single": "istanbul cover -x *.text.js _mocha -- -R spec src/index.test.js",
-    "semantic-release": "semantic-release --branches main",
-    "check-coverage": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
-    "report-coverage": "cat ./coverage/lcov.info | codecov"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chadelofson/starwars-names.git"
-  },
-  "keywords": [
-    "random",
-    "star",
-    "wars"
-  ],
-  "author": "Chad D Elofson <chad@chadslab.net> (https://chadelofson.com/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/chadelofson/starwars-names/issues"
-  },
-  "homepage": "https://github.com/chadelofson/starwars-names#readme",
-  "dependencies": {
-    "unique-random-array": "1.0.0"
-  },
-  "devDependencies": {
-    "chai": "3.5.0",
-    "codecov.io": "0.1.6",
-    "commitizen": "4.2.5",
-    "cz-conventional-changelog": "3.3.0",
-    "ghooks": "2.0.4",
-    "istanbul": "0.4.5",
-    "mocha": "2.5.3",
-    "semantic-release": "^19.0.3"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+    "version": "0.0.0-semantically-released",
+    "description": "Get random Star Wars names",
+    "main": "dist/index.js",
+    "release": {
+        "branches": [
+            "main"
+        ]
     },
-    "ghooks": {
-      "pre-commit": "npm run test:single && npm run check-coverage"
+    "scripts": {
+        "commit": "git-cz",
+        "watch:test": "npm t -- -w",
+        "test": "mocha src/index.test.js --compilers js:@babel/register",
+        "cover": "nyc npm t",
+        "semantic-release": "semantic-release --branches main",
+        "check-coverage": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+        "report-coverage": "cat ./coverage/lcov.info | codecov",
+        "prebuild": "rimraf dist",
+        "build": "babel src --out-dir dist --copy-files --no-copy-ignored --ignore \"src/**/*.test.js\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chadelofson/starwars-names.git"
+    },
+    "keywords": [
+        "random",
+        "star",
+        "wars"
+    ],
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "author": "Chad D Elofson <chad@chadslab.net> (https://chadelofson.com/)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/chadelofson/starwars-names/issues"
+    },
+    "homepage": "https://github.com/chadelofson/starwars-names#readme",
+    "dependencies": {
+        "unique-random-array": "1.0.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "7.18.9",
+        "@babel/core": "7.18.9",
+        "@babel/preset-env": "7.18.9",
+        "@babel/register": "7.18.9",
+        "chai": "3.5.0",
+        "codecov.io": "0.1.6",
+        "commitizen": "4.2.5",
+        "cz-conventional-changelog": "3.3.0",
+        "ghooks": "2.0.4",
+        "istanbul": "0.4.5",
+        "mocha": "2.5.3",
+        "nyc": "15.1.0",
+        "rimraf": "3.0.2",
+        "semantic-release": "^19.0.3"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        },
+        "ghooks": {
+            "pre-commit": "npm run cover && npm run check-coverage"
+        }
+    },
+    "babel": {
+        "presets": [
+            "@babel/preset-env"
+        ]
     }
-  }
 }
